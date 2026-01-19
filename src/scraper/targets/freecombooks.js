@@ -12,8 +12,8 @@ class FreeComBooks {
     const result = [];
     allSubject.each((index, element) => {
         const subject = $(element).text();
-        const url = $(element).attr("href");
-        result.push({subject, url});
+        const categoryUrl = $(element).attr("href");
+        result.push({subject, categoryUrl});
     });
     return result;
    }
@@ -25,8 +25,8 @@ class FreeComBooks {
     const result = [];
     listSubject.each((index, element) => {
         const subject = $(element).text();
-        const url = $(element).attr("href");
-        result.push({subject, url});
+        const subCategoryUrl = $(element).attr("href");
+        result.push({subject, subCategoryUrl});
     });
     return result;
    }
