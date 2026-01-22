@@ -113,28 +113,26 @@ async searchBook(q){
 
     const page = await browser.newPage();
     
-    // 1. Masuk ke URL pencarian website tersebut
     const searchUrl = `https://freecomputerbooks.com/search2.html?q=${encodeURIComponent(q)}`;
     await page.goto(searchUrl, { waitUntil: 'networkidle0' });
-
-    // 2. Tunggu sampai elemen hasil Google (GCSE) muncul di DOM
-    // Elemen .gsc-result biasanya muncul setelah script Google jalan
-    await page.waitForSelector('.gsc-result', { timeout: 5000 });
-
-    // 3. Extract data hasil pencarian
+    await page.waitForSelector('.gsc-result', { timeout: 6000 });
     const results = await page.evaluate(() => {
       const data = [];
       const items = document.querySelectorAll('.gsc-webResult.gsc-result');
       
       items.forEach(item => {
         const titleElement = item.querySelector('a.gs-title');
-        const snippetElement = item.querySelector('.gs-snippet');
+        const detailElement = item.querySelector('.gs-snippet');
+        const imageElement = item.querySelector('img.gs-image')
+        const imageSrc = imageElement ? imageElement.src : null;
+
         
         if (titleElement) {
           data.push({
             title: titleElement.innerText,
             link: titleElement.href,
-            snippet: snippetElement ? snippetElement.innerText : ''
+            image: imageSrc,
+            detail: detailElement ? detailElement.innerText : ''
           });
         }
       });
