@@ -133,7 +133,7 @@ async searchBook(q){
         if (titleElement) {
           data.push({
             title: titleElement.innerText,
-            id: bookPath,
+            slug: bookPath,
             url: bookPath,
             image: imageSrc,
             detail: detailElement ? detailElement.innerText : ''
