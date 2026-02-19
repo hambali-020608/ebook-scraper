@@ -18,8 +18,8 @@ class FreeComBooks {
     const result = [];
     allSubject.each((index, element) => {
         const subject = $(element).text();
-        const categoryUrl = $(element).attr("href");
-        result.push({subject, categoryUrl});
+        const slug = $(element).attr("href");
+        result.push({subject, slug, source:"freeCom"});
     });
     return result;
    }
@@ -36,8 +36,6 @@ class FreeComBooks {
     });
     return result;
    }
-
-  
    async getBookByCategory(subCategoryPath){
     const data = await fetcher(`${this.baseUrl}/${subCategoryPath}`);
     const $ = cheerio.load(data);

@@ -19,9 +19,9 @@ class Dbooks {
             const subject = $(element).text();
             const fullUrl = $(element).attr("href");
             const path = new URL(fullUrl).pathname
-            const categoryUrl =path.replace('/subject/', '').replace('/','');
+            const slug =path.replace('/subject/', '').replace('/','');
 
-            result.push({subject, categoryUrl});
+            result.push({subject, slug, source:"dbooks"});
         });
         return result;
     }
